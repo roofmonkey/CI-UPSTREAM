@@ -17,7 +17,7 @@ echo "Done checking git branch... Proceeding..."
 function increment { 
 
 	version=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v "\[") 
-	newversion=$(python /home/fedora/version.py $version)
+	newversion=$(python /home/fedora/CI-UPSTREAM/version.py $version)
 	mvn versions:set -DnewVersion=$newversion 
 }
 
@@ -47,7 +47,7 @@ function set_AIC {
         echo "... Done analyzing commit: $AUTO_INC_POM";
 }
 
-# Check f we should auto incrementing the pom, then
+# Check if we should auto increment the pom, then
 # we push a new version and increment
 set_AIC
 if [ $AUTO_INC_POM = "true" ]; then
